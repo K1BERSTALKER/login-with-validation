@@ -137,7 +137,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Toggle password visibility
   eyeBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const input = btn.previousElementSibling;
+      const input = btn.previousElementSibling.previousElementSibling;
       const type =
         input.getAttribute("type") === "password" ? "text" : "password";
       input.setAttribute("type", type);
