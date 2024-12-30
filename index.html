@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Login & Register Form</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <form id="registrationForm">
+          <h1>Create Account</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"
+              ><i class="fa-brands fa-google-plus-g"></i
+            ></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="icon"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+          </div>
+          <span>or use your email to register</span>
+          <div class="input-group">
+            <input type="text" id="username" placeholder="Name" />
+            <span class="error">6-16 characters required</span>
+          </div>
+          <div class="input-group">
+            <input type="email" id="email" placeholder="Email" />
+            <span class="error">Enter a valid email</span>
+          </div>
+          <div class="input-group">
+            <input type="password" id="password" placeholder="Password" />
+            <i class="fa-solid fa-eye eye"></i>
+            <span class="error">Cannot be blank</span>
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-container sign-in">
+        <form id="loginForm">
+          <h1>Sign In</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"
+              ><i class="fa-brands fa-google-plus-g"></i
+            ></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="icon"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+          </div>
+          <span>or use your email</span>
+          <div class="input-group">
+            <input type="email" placeholder="Email" id="email" />
+            <span class="error">Enter a valid email</span>
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="Password" id="password" />
+            <i class="fa-solid fa-eye eye"></i>
+            <span class="error">Cannot be blank</span>
+          </div>
+          <a href="#">Forgot Password?</a>
+          <button type="submit">Sign In</button>
+        </form>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Welcome Back!</h1>
+            <p>Log in to access all features</p>
+            <button id="login">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>Hello, Friend!</h1>
+            <p>Register to use all features</p>
+            <button id="register">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
