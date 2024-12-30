@@ -237,8 +237,8 @@ body {
 }
 .fa-eye,
 .fa-eye-slash {
-  position: absolute !important;
-  top: 50% !important;
-  right: 1rem !important;
-  transform: translateY(-50%) !important;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
 }
