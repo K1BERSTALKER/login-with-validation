@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome link  -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -10,83 +11,137 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- Stylesheetlink  -->
     <link rel="stylesheet" href="./index.css" />
+    <!-- Tittle  -->
     <title>Login & Register Form</title>
   </head>
   <body>
-    <div class="container" id="container">
-      <div class="form-container sign-up">
+    <main class="container" id="container">
+      <section class="form-container sign-up">
         <form id="registrationForm">
-          <h1>Create Account</h1>
+          <h2>Create Account</h2>
           <div class="social-icons">
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-google-plus-g"></i
+            <a href="#" class="icon" aria-label="Sign in with Google"
+              ><i class="fa-brands fa-google-plus-g" aria-hidden="true"></i
             ></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-linkedin-in"></i
+            <a href="#" class="icon" aria-label="Sign in with Facebook"
+              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Sign in with GitHub"
+              ><i class="fa-brands fa-github" aria-hidden="true"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Sign in with LinkedIn"
+              ><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i
             ></a>
           </div>
           <span>or use your email to register</span>
           <div class="input-group">
-            <input type="text" id="username" placeholder="Name" />
-            <span class="error">6-16 characters required</span>
+            <label class="sr-only" for="reg-username">Name</label>
+            <input
+              type="text"
+              id="reg-username"
+              placeholder="Name"
+              aria-describedby="username-error"
+            />
+            <span class="error" role="alert" id="username-error"
+              >6-16 characters required</span
+            >
           </div>
           <div class="input-group">
-            <input type="email" id="email" placeholder="Email" />
-            <span class="error">Enter a valid email</span>
+            <label class="sr-only" for="reg-email">Email</label>
+            <input
+              type="email"
+              id="reg-email"
+              placeholder="Email"
+              aria-describedby="email-error"
+            />
+            <span class="error" role="alert" id="email-error"
+              >Enter a valid email</span
+            >
           </div>
           <div class="input-group">
-            <input type="password" id="password" placeholder="Password" />
-            <span class="error">Cannot be blank</span>
-            <i class="fa-solid fa-eye eye"></i>
+            <label class="sr-only" for="reg-password">Password</label>
+            <input
+              type="password"
+              id="reg-password"
+              placeholder="Password"
+              aria-describedby="password-error"
+            />
+            <span class="error" role="alert" id="password-error"
+              >Cannot be blank</span
+            >
+            <button type="button" class="eye" aria-label="Show password">
+              <i class="fa-solid fa-eye" aria-hidden="true"></i>
+            </button>
           </div>
-          <button type="submit">Sign Up</button>
+          <button type="submit" class="btn">Sign Up</button>
         </form>
-      </div>
-      <div class="form-container sign-in">
+      </section>
+      <section class="form-container sign-in hidden">
         <form id="loginForm">
-          <h1>Sign In</h1>
+          <h2>Sign In</h2>
           <div class="social-icons">
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-google-plus-g"></i
+            <a href="#" class="icon" aria-label="Sign in with Google"
+              ><i class="fa-brands fa-google-plus-g" aria-hidden="true"></i
             ></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-linkedin-in"></i
+            <a href="#" class="icon" aria-label="Sign in with Facebook"
+              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Sign in with GitHub"
+              ><i class="fa-brands fa-github" aria-hidden="true"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Sign in with LinkedIn"
+              ><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i
             ></a>
           </div>
           <span>or use your email</span>
           <div class="input-group">
-            <input type="email" placeholder="Email" id="email" />
-            <span class="error">Enter a valid email</span>
+            <label class="sr-only" for="login-email">Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              id="login-email"
+              aria-describedby="login-error"
+            />
+            <span role="alert" class="error" id="login-error"
+              >Enter a valid email</span
+            >
           </div>
           <div class="input-group">
-            <input type="password" placeholder="Password" id="password" />
-            <span class="error">Cannot be blank</span>
-            <i class="fa-solid fa-eye eye"></i>
+            <label class="sr-only" for="login-password">Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              id="login-password"
+              aria-describedby="password-error"
+            />
+            <span role="alert" class="error" id="password-error"
+              >Cannot be blank</span
+            >
+            <button type="button" class="eye" aria-label="Show password">
+              <i class="fa-solid fa-eye" aria-hidden="true"></i>
+            </button>
           </div>
           <a href="#">Forgot Password?</a>
-          <button type="submit">Sign In</button>
+          <button type="submit" class="btn">Sign In</button>
         </form>
-      </div>
-      <div class="toggle-container">
+      </section>
+      <aside class="toggle-container hidden">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
+            <h2>Welcome Back!</h2>
             <p>Log in to access all features</p>
-            <button id="login">Sign In</button>
+            <button type="button" id="login" class="btn">Sign In</button>
           </div>
           <div class="toggle-panel toggle-right">
-            <h1>Hello, Friend!</h1>
+            <h2>Hello, Friend!</h2>
             <p>Register to use all features</p>
-            <button id="register">Sign Up</button>
+            <button type="button" id="register" class="btn">Sign Up</button>
           </div>
         </div>
-      </div>
-    </div>
+      </aside>
+    </main>
     <script src="./index.js"></script>
   </body>
 </html>
