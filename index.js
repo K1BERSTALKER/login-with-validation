@@ -3,89 +3,85 @@ window.addEventListener("DOMContentLoaded", () => {
   const registrationForm = document.querySelector("#registrationForm");
   const loginForm = document.querySelector("#loginForm");
   const eyeBtn = document.querySelectorAll(".eye");
+
+  const emailRules = (value) => [
+    { test: value.length > 0, error: "Email is required" },
+    { test: /@/.test(value), error: "Email must contain an @ symbol" },
+    {
+      test: /\.[a-zA-Z]{2,}$/.test(value),
+      error: "Email must contain a valid domain",
+    },
+    {
+      test: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
+      error: "Email must be valid",
+    },
+  ];
+
+  const passwordRules = (value) => [
+    { test: value.length > 0, error: "Password is required" },
+    {
+      test: value.length >= 8,
+      error: "Password must be at least 8 characters long",
+    },
+    {
+      test: /\d/.test(value),
+      error: "Password must contain at least one number",
+    },
+    {
+      test: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+      error: "It must contain at least one special character",
+    },
+  ];
+
+  const usernameRules = (value) => [
+    { test: value.length > 0, error: "Username is required" },
+    {
+      test: value.length >= 6,
+      error: "Username must be at least 6 characters long",
+    },
+    {
+      test: /^[a-zA-Z0-9]+$/.test(value),
+      error: "Username must contain only letters and numbers",
+    },
+  ];
+
+  const validators = {
+    username: usernameRules,
+    email: emailRules,
+    password: passwordRules,
+  };
+
   const regValidators = {
-    "reg-username": (value) => [
-      { test: value.length > 0, error: "Username is required" },
-      {
-        test: value.length >= 6,
-        error: "Username must be at least 6 characters long",
-      },
-      {
-        test: /^[a-zA-Z0-9]+$/.test(value),
-        error: "Username must contain only letters and numbers",
-      },
-    ],
-    "reg-email": (value) => [
-      { test: value.length > 0, error: "Email is required" },
-      { test: /@/.test(value), error: "Email must contain an @ symbol" },
-      {
-        test: /\.[a-zA-Z]{2,}$/.test(value),
-        error: "Email must contain a valid domain",
-      },
-      {
-        test: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
-        error: "Email must be valid",
-      },
-    ],
-    "reg-password": (value) => [
-      { test: value.length > 0, error: "Password is required" },
-      {
-        test: value.length >= 8,
-        error: "Password must be at least 8 characters long",
-      },
-      {
-        test: /\d/.test(value),
-        error: "Password must contain at least one number",
-      },
-      {
-        test: /[!@#$%^&*(),.?":{}|<>]/.test(value),
-        error: "It must contain at least one special character",
-      },
-    ],
+    "reg-username": usernameRules,
+    "reg-email": emailRules,
+    "reg-password": passwordRules,
   };
 
   const loginValidators = {
-    "login-email": (value) => [
-      { test: value.length > 0, error: "Email is required" },
-      { test: /@/.test(value), error: "Email must contain an @ symbol" },
-      {
-        test: /\.[a-zA-Z]{2,}$/.test(value),
-        error: "Email must contain a valid domain",
-      },
-      {
-        test: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
-        error: "Email must be valid",
-      },
-    ],
-    "login-password": (value) => [
-      { test: value.length > 0, error: "Password is required" },
-      {
-        test: value.length >= 8,
-        error: "Password must be at least 8 characters long",
-      },
-      {
-        test: /\d/.test(value),
-        error: "Password must contain at least one number",
-      },
-      {
-        test: /[!@#$%^&*(),.?":{}|<>]/.test(value),
-        error: "It must contain at least one special character",
-      },
-    ],
+    "login-email": emailRules,
+    "login-password": passwordRules,
   };
 
   let formSubmitted = false;
 
-  // Toggle error message
-  const toggleErrorMessage = (element, isValid, message = " ") => {
-    const errorMessage = element.nextElementSibling;
-    errorMessage.textContent = message;
-    errorMessage.classList.toggle("active", !isValid);
+  const toggleErrorMessage = (inputElement, isValid, massage = "") => {
+    const inputGroup = inputElement.closest(".input-group");
+    if (!inputGroup) return;
+
+    const errorSpan = inputGroup.querySelector(".error");
+    if (!errorSpan) return;
+
+    errorSpan.textContent = massage;
+    errorSpan.classList.toggle("active", isValid);
   };
 
-  // Validate input
-  const validateInput = (input, validator) => {
-    const rules = validator[input.id](input.value);
+  const validateInput = (input) => {
+    const validationType = input.dataset.validate;
+
+    if (!validationType || !validators[validationType]) return true;
+
+    const rules = validators[validateType](input.value);
+
     const failedRule = rules.find((rule) => !rule.test);
 
     if (failedRule) {
@@ -97,16 +93,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Validate form
-  const validateForm = (element, validator) => {
-    let allValid = true;
-    [...element.elements].forEach((input) => {
-      if (validator[input.id]) {
-        const isValid = validateInput(input, validator);
-        if (!isValid) allValid = false;
-      }
+  const clearAllErrors = () => {
+    const errorElements = document.querySelectorAll(".error");
+    errorElements.forEach((errorElement) => {
+      errorElement.classList.remove("active");
+      errorElement.textContent = "";
     });
-    return allValid;
   };
 
   // Register input event listeners
@@ -158,10 +150,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector("#register").addEventListener("click", () => {
     container.classList.add("active");
+    clearAllErrors();
     registrationForm.reset();
   });
   document.querySelector("#login").addEventListener("click", () => {
     container.classList.remove("active");
+    clearAllErrors();
     loginForm.reset();
   });
 
